@@ -2,31 +2,17 @@ function solve() {
 
     let playerOneCards = document.querySelectorAll('#player1Div img');
     let playerTwoCards = document.querySelectorAll('#player2Div img');
-    let result = document.querySelector('#result');
     let spanElements = document.querySelectorAll('span');
-    let firstElClicked = false;
-    let secondElClicked = false;
+    let divHistory = document.querySelector('#history');
+    let tempCounterForResult = 0;
+    let twoCardsArr = [];
 
-
-
-    greaterCard();
-
-    
-    function greaterCard() {
-
-        let firstCard = addEventListenerToCard(playerOneCards, firstElClicked);
-        let secondCard = addEventListenerToCard(playerTwoCards, secondElClicked);
-        console.log(firstCard)
-        cardBorder(firstCard, secondCard);
-
-
-        // make firstClicked and secondClicked false at the end, also span ''
-    }
-
+        addEventListenerToCard(playerOneCards);
+        addEventListenerToCard(playerTwoCards);
+   
     function cardBorder(cardOne, cardTwo) {
         if (cardOne !== undefined && cardTwo !== undefined) {
-            console.log(cardOne, cardTwo)
-            console.log(cardOne.name)
+            
             if (Number(cardOne.name) > Number(cardTwo.name)) {
                 cardOne.border ="2px solid green";
                 cardTwo.border ="2px solid red";
@@ -36,7 +22,6 @@ function solve() {
             cardTwo.border = "2px solid green";
             return;
         }
-
     }
 
     function closeEventListener(cards) {
@@ -47,19 +32,42 @@ function solve() {
 
     function eventListenerWork(e) {
         let playerCardWork = e.target;
-        //Error, must select only one el, debug pls
-        if (playerCardWork.parentNode.id == "player1Div") {
-            spanElements[0].innerText = playerCardWork.name;
-            firstElClicked = true;
+        if (playerCardWork.src == "http://127.0.0.1:5500/images/card.jpg") {
+            if (playerCardWork.parentNode.id == "player1Div") {
+                spanElements[0].innerText = playerCardWork.name;
+                closeEventListener(playerCardWork.parentNode);
+                addEventListenerToCard(playerTwoCards);
+            } else {
+                spanElements[2].innerText = playerCardWork.name;
+                closeEventListener(playerCardWork.parentNode);
+                addEventListenerToCard(playerOneCards);
+            }
+
+            tempCounterForResult++;
+            playerCardWork.src = "images/whiteCard.jpg";
+            twoCardsArr.push(playerCardWork);
+
+            timeForResult();
             
-        } else {
-            spanElements[2].innerText = playerCardWork.name;
-            secondElClicked = true;
         }
-        playerCardWork.src = "images/whiteCard.jpg";
-        closeEventListener(playerCardWork.parentNode);
     }
 
+    function timeForResult(){
+        
+        if (tempCounterForResult % 2 == 0 && tempCounterForResult !== 0) {
+            
+            let firstCard = twoCardsArr[0];
+            let secondCard = twoCardsArr[1];
+            //fix border colour for image
+            cardBorder(firstCard, secondCard);
+            divHistory.innerText += `${firstCard.name} vs ${secondCard.name}\n`;
+            twoCardsArr=[];
+
+            setTimeout(()=> {
+            spanElements[0].innerText = '';
+            spanElements[2].innerText = '';}, 2000);
+        }
+    }
 
     function addEventListenerToCard(playerCards) {
 
@@ -70,8 +78,5 @@ function solve() {
                 playerCard.addEventListener('click', eventListenerWork);
             }
         }
-
-        // After every hand, push the current card names in the history div in the following format:
-        // [{top side card name} vs {bottom side card name} ]
     
 }
