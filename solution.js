@@ -95,14 +95,13 @@ function solve() {
             setTimeout(() => {
                 spanElements[0].innerText = '';
                 spanElements[2].innerText = '';
-            }, 2000);
+            }, 500);
         }
 
         if (tempCounterForResult == cardsNumber * 2) {
             
             let firstPlayerWins = 0;
             let secondPlayerWins = 0;
-            console.log(resultsArray)
             for (let l = 0; l < cardsNumber * 2; l+=2) {
                 const firstElement = Number(resultsArray[l]);
                 const secondElement = Number(resultsArray[l + 1]);
@@ -113,7 +112,8 @@ function solve() {
                 }
             }
             let result = firstPlayerWins - secondPlayerWins;
-            console.log(firstPlayerWins, secondPlayerWins)
+                spanElements[0].innerText = '';
+                spanElements[2].innerText = '';
             if (result > 0) {
                 spanElements[1].innerText = "The winnder is The Red Player!!! Bow down to the Empire of the Sits";
             } else if(result < 0){
