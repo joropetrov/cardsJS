@@ -1,14 +1,40 @@
 function solve() {
 
+    let playerOneDiv =  document.querySelector('#player1Div');
+    let playerTwoDiv =  document.querySelector('#player2Div');
+    let cardsNumber = 8;
+
+    createHtmlCards(playerOneDiv);
+    createHtmlCards(playerTwoDiv);
+
     let playerOneCards = document.querySelectorAll('#player1Div img');
     let playerTwoCards = document.querySelectorAll('#player2Div img');
     let spanElements = document.querySelectorAll('span');
     let divHistory = document.querySelector('#history');
     let tempCounterForResult = 0;
     let twoCardsArr = [];
+    
 
         addEventListenerToCard(playerOneCards);
         addEventListenerToCard(playerTwoCards);
+
+    function createHtmlCards(chosePlayer){
+
+        let cardImg = 'images/starWarsBlue.png';
+
+        if (chosePlayer.id == 'player1Div') {
+            cardImg = 'images/starWarsRed.png';
+        };
+
+        for (let inx = 0; inx < cardsNumber; inx++) {
+
+            let randNumber = Math.floor(Math.random() * 10);
+            let card = document.createElement('img');
+            card.src = cardImg;
+            card.name = randNumber;
+            chosePlayer.appendChild(card);
+        }
+    }    
    
     function cardBorder(cardOne, cardTwo) {
         if (cardOne !== undefined && cardTwo !== undefined) {
@@ -32,7 +58,8 @@ function solve() {
 
     function eventListenerWork(e) {
         let playerCardWork = e.target;
-        if (playerCardWork.src == "http://127.0.0.1:5500/images/card.jpg") {
+        if (playerCardWork.src == "http://127.0.0.1:5500/images/starWarsRed.png" ||
+        playerCardWork.src =="http://127.0.0.1:5500/images/starWarsBlue.png" ) {
             if (playerCardWork.parentNode.id == "player1Div") {
                 spanElements[0].innerText = playerCardWork.name;
                 closeEventListener(playerCardWork.parentNode);
@@ -44,7 +71,7 @@ function solve() {
             }
 
             tempCounterForResult++;
-            playerCardWork.src = "images/whiteCard.jpg";
+            playerCardWork.src = "images/whiteCard.png";
             twoCardsArr.push(playerCardWork);
 
             timeForResult();
@@ -71,9 +98,9 @@ function solve() {
 
     function addEventListenerToCard(playerCards) {
 
-        for (let index = 0; index < playerCards.length; index++) {
+        for (let inx = 0; inx < playerCards.length; inx++) {
             
-            let playerCard = playerCards[index];
+            let playerCard = playerCards[inx];
             
                 playerCard.addEventListener('click', eventListenerWork);
             }
