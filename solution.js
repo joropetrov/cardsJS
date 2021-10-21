@@ -39,10 +39,14 @@ function solve() {
 
     function cardBorder(cardOne, cardTwo) {
         if (cardOne !== undefined && cardTwo !== undefined) {
-
-            cardOne.style.border = "2px solid red";
-            cardTwo.style.border = "2px solid blue";
-            return;
+            if (cardOne.parentNode.id == 'player1Div') {
+                cardOne.style.border = "2px solid red";
+                cardTwo.style.border = "2px solid blue";
+                return;
+            }
+                cardOne.style.border = "2px solid blue";
+                cardTwo.style.border = "2px solid red";        
+                return;
         }
     }
 
@@ -63,6 +67,8 @@ function solve() {
                 closeEventListener(playerCardWork.parentNode);
                 addEventListenerToCard(playerTwoCards);
             } else {
+                if (tempCounterForResult == 0) {
+                }
                 spanElements[2].innerText = playerCardWork.name;
                 closeEventListener(playerCardWork.parentNode);
                 addEventListenerToCard(playerOneCards);
@@ -82,7 +88,6 @@ function solve() {
             let firstCard = twoCardsArr[0];
             let secondCard = twoCardsArr[1];
             resultsArray.push(firstCard.name,secondCard.name);
-            //fix border colour for image
             cardBorder(firstCard, secondCard);
             divHistory.innerText += `${firstCard.name} vs ${secondCard.name}\n`;
             twoCardsArr = [];
@@ -107,11 +112,13 @@ function solve() {
                     secondPlayerWins++;
                 }
             }
-            if (firstPlayerWins > secondPlayerWins) {
+            let result = firstPlayerWins - secondPlayerWins;
+            console.log(firstPlayerWins, secondPlayerWins)
+            if (result > 0) {
                 spanElements[1].innerText = "The winnder is The Red Player!!! Bow down to the Empire of the Sits";
-            }else if(firstPlayerWins < secondPlayerWins){
-                spanElements[1].innerText ="The winner is The Blue Player!!! Congrats, you've saved the galaxy";
-            }else{
+            } else if(result < 0){
+                spanElements[1].innerText =`The winner is The Blue Player!!! Congrats, you saved the galaxy`;
+            } else{
                 spanElements[1].innerText ="No winner... The war has just begun!";
             }
         }
