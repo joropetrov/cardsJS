@@ -1,7 +1,7 @@
 function solve() {
 
-    let playerOneDiv =  document.querySelector('#player1Div');
-    let playerTwoDiv =  document.querySelector('#player2Div');
+    let playerOneDiv = document.querySelector('#player1Div');
+    let playerTwoDiv = document.querySelector('#player2Div');
     let cardsNumber = 8;
 
     createHtmlCards(playerOneDiv);
@@ -13,12 +13,13 @@ function solve() {
     let divHistory = document.querySelector('#history');
     let tempCounterForResult = 0;
     let twoCardsArr = [];
-    
+    let resultsArray =[];
 
-        addEventListenerToCard(playerOneCards);
-        addEventListenerToCard(playerTwoCards);
 
-    function createHtmlCards(chosePlayer){
+    addEventListenerToCard(playerOneCards);
+    addEventListenerToCard(playerTwoCards);
+
+    function createHtmlCards(chosePlayer) {
 
         let cardImg = 'images/starWarsBlue.png';
 
@@ -34,14 +35,14 @@ function solve() {
             card.name = randNumber;
             chosePlayer.appendChild(card);
         }
-    }    
-   
+    }
+
     function cardBorder(cardOne, cardTwo) {
         if (cardOne !== undefined && cardTwo !== undefined) {
-            
+
             if (Number(cardOne.name) > Number(cardTwo.name)) {
-                cardOne.border ="2px solid green";
-                cardTwo.border ="2px solid red";
+                cardOne.border = "2px solid green";
+                cardTwo.border = "2px solid red";
                 return;
             }
             cardOne.border = "2px solid red";
@@ -57,9 +58,11 @@ function solve() {
     }
 
     function eventListenerWork(e) {
+
         let playerCardWork = e.target;
         if (playerCardWork.src == "http://127.0.0.1:5500/images/starWarsRed.png" ||
         playerCardWork.src =="http://127.0.0.1:5500/images/starWarsBlue.png" ) {
+
             if (playerCardWork.parentNode.id == "player1Div") {
                 spanElements[0].innerText = playerCardWork.name;
                 closeEventListener(playerCardWork.parentNode);
@@ -69,41 +72,64 @@ function solve() {
                 closeEventListener(playerCardWork.parentNode);
                 addEventListenerToCard(playerOneCards);
             }
-
+            playerCardWork.src = `images/${playerCardWork.name}.png`;
             tempCounterForResult++;
-            playerCardWork.src = "images/whiteCard.png";
             twoCardsArr.push(playerCardWork);
-
             timeForResult();
-            
         }
     }
+       
 
-    function timeForResult(){
-        
+    function timeForResult() {
+
         if (tempCounterForResult % 2 == 0 && tempCounterForResult !== 0) {
             
             let firstCard = twoCardsArr[0];
             let secondCard = twoCardsArr[1];
+            resultsArray.push(firstCard.name,secondCard.name);
             //fix border colour for image
             cardBorder(firstCard, secondCard);
             divHistory.innerText += `${firstCard.name} vs ${secondCard.name}\n`;
-            twoCardsArr=[];
+            twoCardsArr = [];
 
-            setTimeout(()=> {
-            spanElements[0].innerText = '';
-            spanElements[2].innerText = '';}, 2000);
+            setTimeout(() => {
+                spanElements[0].innerText = '';
+                spanElements[2].innerText = '';
+            }, 2000);
+        }
+
+        if (tempCounterForResult == cardsNumber * 2) {
+            
+            let firstPlayerWins = 0;
+            let secondPlayerWins = 0;
+            console.log(resultsArray)
+            for (let l = 0; l < cardsNumber * 2; l+=2) {
+                const firstElement = Number(resultsArray[l]);
+                const secondElement = Number(resultsArray[l + 1]);
+                if (firstElement > secondElement) {
+                    firstPlayerWins++;
+                }else if (secondElement > firstElement) {
+                    secondPlayerWins++;
+                }
+            }
+            if (firstPlayerWins > secondPlayerWins) {
+                spanElements[1].innerText = "The winnder is The Red Player!!! Bow down to the Empire of the Sits";
+            }else if(firstPlayerWins < secondPlayerWins){
+                spanElements[1].innerText ="The winner is The Blue Player!!! Congrats, you've saved the galaxy";
+            }else{
+                spanElements[1].innerText ="No winner... The war has just begun!";
+            }
         }
     }
 
     function addEventListenerToCard(playerCards) {
 
         for (let inx = 0; inx < playerCards.length; inx++) {
-            
+
             let playerCard = playerCards[inx];
-            
-                playerCard.addEventListener('click', eventListenerWork);
-            }
+
+            playerCard.addEventListener('click', eventListenerWork);
         }
-    
+    }
+
 }
