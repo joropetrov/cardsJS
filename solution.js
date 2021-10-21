@@ -40,13 +40,8 @@ function solve() {
     function cardBorder(cardOne, cardTwo) {
         if (cardOne !== undefined && cardTwo !== undefined) {
 
-            if (Number(cardOne.name) > Number(cardTwo.name)) {
-                cardOne.border = "2px solid green";
-                cardTwo.border = "2px solid red";
-                return;
-            }
-            cardOne.border = "2px solid red";
-            cardTwo.border = "2px solid green";
+            cardOne.style.border = "2px solid red";
+            cardTwo.style.border = "2px solid blue";
             return;
         }
     }
