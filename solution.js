@@ -33,7 +33,11 @@ function solve() {
             let card = document.createElement('img');
             card.src = cardImg;
             card.name = randNumber;
+            card.height = "200";
+            card.width = "120";
+            
             chosePlayer.appendChild(card);
+            console.log(card.width, card.height)
         }
     }
 
@@ -59,8 +63,9 @@ function solve() {
     function eventListenerWork(e) {
 
         let playerCardWork = e.target;
-        if (playerCardWork.src == "http://127.0.0.1:5500/images/starWarsRed.png" ||
-        playerCardWork.src =="http://127.0.0.1:5500/images/starWarsBlue.png" ) {
+        let currentLiveServerPath = window.location.href.slice(0,22);
+        if (playerCardWork.src == `${currentLiveServerPath}images/starWarsRed.png` ||
+        playerCardWork.src ==`${currentLiveServerPath}images/starWarsBlue.png`) {
 
             if (playerCardWork.parentNode.id == "player1Div") {
                 spanElements[0].innerText = playerCardWork.name;
