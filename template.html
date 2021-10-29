@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="template.css">
-    <title>CARDS</title>
-    <script src="solution.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="template.css">
 </head>
-
 <body>
-    <section class="description">
-        <h1 style="text-align:center">STAR WARS CARD BATTLE
-        </h1>
-        <br>
-        <br>
-        <h2 style="text-align:center">
-        <button onclick="window.location.reload()">
-            <a href="javascript:location.reload(true)">Start New Game</a>
-        </button>
-    </h2>
-    </section>
-    <section class="cards">
-        <div id="player1Div">
-        </div>
-        <br><br>
-        <br><br>
-        <div id="result" colspan="center">
-            <span></span>
-            <span>VS</span>
-            <span></span>
-        </div>
-        <br><br>
-        <br><br>
-        <div id="player2Div">
-        </div>
-       
-        
-        <div id="history"></div>
-    </section>
-    <script>
-        solve();
-    </script>
-</body>
+  <section class="description">
+    <h1 style="text-align:center">STAR WARS CARD BATTLE
+    </h1>
+    <br>
+    <br>
+    <h2 style="text-align:center">
+    <button onclick="window.location.reload()">
+        <a href="javascript:location.reload(true)">Start New Game</a>
+    </button>
+</h2>
+</section>
 
+ <section id="player1Div">
+ 
+</section>
+
+<div id="result" colspan="center">
+  <span></span>
+  <span>VS</span>
+  <span></span>
+</div>
+
+<section id="player2Div">
+  
+</section>
+<div id="history" style="text-align:center"></div>
+
+  <script src="solution.js"></script>
+  <script>solve();</script>
+</body>
 </html>
+
