@@ -3,7 +3,6 @@ function solve() {
     const redPlayerWinMessage = "The winnder is The Red Player!!! Bow down to the Empire of the Sits";
     const bluePlayerWinMessage = "The winner is The Blue Player!!! Congrats, you saved the galaxy";
     const noWinnerMessage = "No winner... The war has just begun!";
-    var cards = document.querySelectorAll('.card'); //new
     let playerOneDiv = document.querySelector('#player1Div');
     let playerTwoDiv = document.querySelector('#player2Div');
     let cardsNumber = 8;
@@ -23,13 +22,6 @@ function solve() {
     addEventListenerToCard(playerOneCards);
     addEventListenerToCard(playerTwoCards);
 
-     //newFuncS
-    // [...cards].forEach((card) => {
-    //     card.addEventListener('click', function () {
-    //         card.classList.toggle('is-flipped');
-    //     });
-    // });
-
     function createHtmlCards(chosePlayer) {
 
         let cardImg = 'images/starWarsBlue.png';
@@ -44,7 +36,6 @@ function solve() {
             
             let secondCardPath = "images/" + randNumber +".png";
             let createCard = document.createElement('div');
-
             createCard.className ="scene scene--card";
             createCard.innerHTML =
             `
