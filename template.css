@@ -1,68 +1,60 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+body { font-family: sans-serif; }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.scene {
+  display: inline-block;
+  width: 140px;
+  height: 220px;
+/*   border: 1px solid #CCC; */
+  margin: 40px 0;
+  perspective: 600px;
 }
 
-html {
-    font-family: "PT sans", sans-serif;
-    font-size: 24px;
-    color: #234465;
+.card {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1s;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    min-height: 100vh;
-    flex-wrap: wrap;
+.card.is-flipped {
+  transform: translateX(-100%) rotateY(-180deg);
 }
 
-input[type="button"],
-button {
-    padding: 0.3rem 0.5rem;
-    font-size: 0.7em;
-    margin: 1rem 0 1rem 0;
-    border: none;
-    color: white;
-    background: #234465;
-    border-radius: 5px;
-    outline: none;
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 260px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  backface-visibility: hidden;
 }
 
-input,
-button {
-    vertical-align: top;
+.card__face--front {
+  background: crimson;
 }
 
-input {
-    width: 20%;
-    font-size: 20px;
+.card__face--back {
+  background: slateblue;
+  transform: rotateY(180deg);
 }
-
-#exercise {
-    margin: 0 auto;
-    text-align: center;
+span {
+  font-size: 44px;
+  padding: 11px;
+  font-weight: bold;
+  text-align: center;
 }
-
-
-#exercise p {
-    border-bottom: 1px solid white;
-    word-wrap: break-word;
+#result {
+  text-align: center;
 }
-
-#exercise span {
-    font-size: 24px;
-    color: #234465;
-    font-weight: bold;
+section {
+  text-align: center;
 }
-
-#exercise div {
-    border-bottom: 1px solid #234465;
-}
-
 a {
     color: violet;
     text-decoration: none;
@@ -71,37 +63,9 @@ a {
     padding: 8px;
     font-weight: bold;
 }
-.description {
-    width: 60%;
-    padding: 3rem 0 0 0;
-    margin: 0 auto;
-}
-
-.cards {
-    width: 60%;
-    padding: 3rem 0 3rem 0;
-    margin: 0 auto;
-}
-
-#result {
-    text-align: center;
-}
-
-#result:nth-child(2), #history {
-    font-size: 44px;
-    padding: 11px;
-    font-weight: bold;
-}
-span {
-    font-size: 88px;
-    padding: 22px;
-    font-weight: bold;
-}
-h1 {
-    border-style: inset;
-    border-radius: 1;
-}
-img {
-/*     
-    transform: rotateY(180deg); */
+h1{
+  font-size: 44px;
+  padding: 11px;
+  font-weight: bold;
+  text-align: center;
 }
