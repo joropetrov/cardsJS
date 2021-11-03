@@ -1,12 +1,12 @@
 function solve() {
 
-    const redPlayerWinMessage = "The winnder is The Red Player!!! Bow down to the Empire of the Sits";
-    const bluePlayerWinMessage = "The winner is The Blue Player!!! Congrats, you saved the galaxy";
+    const redPlayerWinMessage = "The winnder is The Red Player!!!\nBow down to the Empire of the Sits";
+    const bluePlayerWinMessage = "The winner is The Blue Player!!!\nCongrats, you saved the galaxy";
     const noWinnerMessage = "No winner... The war has just begun!";
     let playerOneDiv = document.querySelector('#player1Div');
     let playerTwoDiv = document.querySelector('#player2Div');
     let cardsNumber = 8;
-  
+
     createHtmlCards(playerOneDiv);
     createHtmlCards(playerTwoDiv);
 
