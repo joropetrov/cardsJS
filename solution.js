@@ -53,34 +53,32 @@ function solve() {
     }
 
     function eventListenerWork(e) {
-        
+
         let playerCardWork = e.target;
-        let currentLiveServerPath = window.location.href.slice(0,22);
-        
-        if (playerCardWork.src == `${currentLiveServerPath}images/starWarsRed.png` ||
-        playerCardWork.src ==`${currentLiveServerPath}images/starWarsBlue.png`) {
+        let port = window.location.href.slice(0, 22);
 
-            let cardWorkParentNode = playerCardWork.parentNode.parentNode.parentNode.parentNode;
+        let cardWorkParentNode = playerCardWork.parentNode.parentNode.parentNode.parentNode;
 
-            if (cardWorkParentNode.id == "player1Div") {
-                spanElements[0].innerText = playerCardWork.id;
-                closeEventListenerForCard(playerOneCards);
-                addEventListenerForCard(playerTwoCards);
-            } else {
-                spanElements[2].innerText = playerCardWork.id;
-                closeEventListenerForCard(playerTwoCards);
-                addEventListenerForCard(playerOneCards);
-            }
-
-            playerCardWork.parentNode.parentNode.classList.toggle('is-flipped');
-           
-            tempCounterForResult++;
-            twoCardsArr.push(playerCardWork);
-            timeForResult();
+        if (cardWorkParentNode.id == "player1Div") {
+            switchClicableCard(0, playerOneCards, playerTwoCards, playerCardWork);
+        } else {
+            switchClicableCard(2, playerTwoCards, playerOneCards, playerCardWork);
         }
+
+        playerCardWork.parentNode.parentNode.classList.toggle('is-flipped');
+        tempCounterForResult++;
+        twoCardsArr.push(playerCardWork);
+        
+        showResult();
     }
 
-    function timeForResult() {
+    function switchClicableCard(num, oldCard, newCard, currentCard){
+        spanElements[`${num}`].innerText = currentCard.id;
+                closeEventListenerForCard(oldCard);
+                addEventListenerForCard(newCard);
+    }
+
+    function showResult() {
             
         if (tempCounterForResult % 2 == 0 && tempCounterForResult !== 0) {
             
@@ -92,11 +90,12 @@ function solve() {
 
             setTimeout(() => clearSpanResult(), 500);
         }
-
         if (tempCounterForResult == cardsNumber * 2) {
 
             let winner = calculateWinner();
             setWinnerMessage(winner);
+            closeEventListenerForCard(playerOneCards);
+            closeEventListenerForCard(playerTwoCards);
         }
     }
 
