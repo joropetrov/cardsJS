@@ -56,20 +56,22 @@ function solve() {
 
         let playerCardWork = e.target;
         let port = window.location.href.slice(0, 22);
-
         let cardWorkParentNode = playerCardWork.parentNode.parentNode.parentNode.parentNode;
 
-        if (cardWorkParentNode.id == "player1Div") {
-            switchClicableCard(0, playerOneCards, playerTwoCards, playerCardWork);
-        } else {
-            switchClicableCard(2, playerTwoCards, playerOneCards, playerCardWork);
-        }
+        if (playerCardWork.src == `${port}images/starWarsRed.png` ||
+            playerCardWork.src == `${port}images/starWarsBlue.png`) {
 
-        playerCardWork.parentNode.parentNode.classList.toggle('is-flipped');
-        tempCounterForResult++;
-        twoCardsArr.push(playerCardWork);
-        
-        showResult();
+            if (cardWorkParentNode.id == "player1Div") {
+                switchClicableCard(0, playerOneCards, playerTwoCards, playerCardWork);
+            } else {
+                switchClicableCard(2, playerTwoCards, playerOneCards, playerCardWork);
+            }
+
+            playerCardWork.parentNode.parentNode.classList.toggle('is-flipped');
+            tempCounterForResult++;
+            twoCardsArr.push(playerCardWork);
+            showResult();
+        }
     }
 
     function switchClicableCard(num, oldCard, newCard, currentCard){
