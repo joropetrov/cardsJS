@@ -1,4 +1,7 @@
-body { font-family: sans-serif; }
+body {
+   font-family: sans-serif; 
+   background-color: gainsboro;
+}
 
 .scene {
   display: inline-block;
@@ -44,8 +47,8 @@ body { font-family: sans-serif; }
   transform: rotateY(180deg);
 }
 span {
-  font-size: 44px;
-  padding: 11px;
+  font-size: 33px;
+  padding: 10px;
   font-weight: bold;
   text-align: center;
 }
@@ -68,6 +71,12 @@ h1{
   padding: 11px;
   font-weight: bold;
   text-align: center;
+  display: inline-block;
+  border: 1px solid black;
+  border:double;
+  border-color: royalblue;
+  border-inline-end-color: red;
+  border-inline-start-color: red;
 }
 #history {
   font-size: 22px;

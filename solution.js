@@ -1,7 +1,7 @@
 function solve() {
 
-    const redPlayerWinMessage = "The winnder is The Red Player!!!\nBow down to the Empire of the Sits";
-    const bluePlayerWinMessage = "The winner is The Blue Player!!!\nCongrats, you saved the galaxy";
+    const redPlayerWinMessage = "The winnder is The Red Player!!! Bow down to the Empire of the Sits!";
+    const bluePlayerWinMessage = "The winner is The Blue Player!!! Congrats, you saved the galaxy!";
     const noWinnerMessage = "No winner... The war has just begun!";
     const cardsNumber = 8;
 
@@ -87,7 +87,7 @@ function solve() {
             let firstCard = twoCardsArr[0];
             let secondCard = twoCardsArr[1];
             resultsArray.push(firstCard.id,secondCard.id);
-            document.querySelector('#history').innerText += `${firstCard.id} vs ${secondCard.id}\n`;
+            document.querySelector('#history').innerText += `[${firstCard.id} vs ${secondCard.id}]`;
             twoCardsArr = [];
 
             setTimeout(() => clearSpanResult(), 500);
